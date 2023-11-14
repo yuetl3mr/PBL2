@@ -1,0 +1,100 @@
+BN1;To Kill a Mockingbird;Harper Lee;5;1
+BN2;1984;George Orwell;5;1
+BN3;The Great Gatsby;F. Scott Fitzgerald;5;1
+BN4;Pride and Prejudice;Jane Austen;5;1
+BN5;The Catcher in the Rye;J.D. Salinger;5;1
+BN6;Animal Farm;George Orwell;5;1
+BN7;Brave New World;Aldous Huxley;5;1
+BN8;The Lord of the Rings;J.R.R. Tolkien;3;1
+BN9;The Hobbit;J.R.R. Tolkien;3;1
+BN10;The Chronicles of Narnia;C.S. Lewis;3;1
+BN11;The Little Prince;Antoine de Saint-Exupéry;5;1
+BN12;Harry Potter and the Sorcerer's Stone;J.K. Rowling;3;1
+BN13;The Hobbit;J.R.R. Tolkien;3;1
+BN14;The Da Vinci Code;Dan Brown;5;1
+BN15;The Alchemist;Paulo Coelho;5;1
+BN16;A Tale of Two Cities;Charles Dickens;5;1
+BN17;Moby-Dick;Herman Melville;5;1
+BN18;The Grapes of Wrath;John Steinbeck;5;1
+BN19;Wuthering Heights;Emily Brontë;5;1
+BN20;Frankenstein;Mary Shelley;2;1
+BN21;The Picture of Dorian Gray;Oscar Wilde;5;1
+BN22;War and Peace;Leo Tolstoy;5;1
+BN23;The Adventures of Huckleberry Finn;Mark Twain;5;1
+BN24;Dracula;Bram Stoker;2;1
+BN25;One Hundred Years of Solitude;Gabriel García Márquez;5;1
+BN26;The Sun Also Rises;Ernest Hemingway;5;1
+BN27;The Canterbury Tales;Geoffrey Chaucer;5;1
+BN28;Les Misérables;Victor Hugo;5;1
+BN29;Anna Karenina;Leo Tolstoy;5;1
+BN30;The Count of Monte Cristo;Alexandre Dumas;5;1
+BN31;The Scarlet Letter;Nathaniel Hawthorne;5;1
+BN32;The Divine Comedy;Dante Alighieri;5;1
+BN33;Gulliver's Travels;Jonathan Swift;5;1
+BN34;The Iliad;Homer;5;1
+BN35;The Odyssey;Homer;5;1
+BN36;Crime and Punishment;Fyodor Dostoevsky;5;1
+BN37;The Brothers Karamazov;Fyodor Dostoevsky;5;1
+BN38;Great Expectations;Charles Dickens;5;1
+BN39;Jane Eyre;Charlotte Brontë;5;1
+BN40;Sense and Sensibility;Jane Austen;5;1
+BN41;Alice's Adventures in Wonderland;Lewis Carroll;3;1
+BN42;The War of the Worlds;H.G. Wells;5;1
+BN43;The Call of the Wild;Jack London;5;1
+BN44;Robinson Crusoe;Daniel Defoe;5;1
+BN45;The Old Man and the Sea;Ernest Hemingway;5;1
+BN46;The Outsiders;S.E. Hinton;5;1
+BN47;Lord of the Flies;William Golding;5;1
+BN48;Little Women;Louisa May Alcott;5;1
+BN49;The Jungle Book;Rudyard Kipling;5;1
+BN50;The Secret Garden;Frances Hodgson Burnett;5;1
+BN51;The Help;Kathryn Stockett;6;1
+BN52;The Shining;Stephen King;2;1
+BN53;The Stand;Stephen King;2;1
+BN54;The Gunslinger;Stephen King;3;1
+BN55;Watchmen;Alan Moore;4;1
+BN56;The Bible;Various;5;1
+BN57;Sapiens: A Brief History of Humankind;Yuval Noah Harari;6;1
+BN58;A Short History of Nearly Everything;Bill Bryson;9;1
+BN59;The Selfish Gene;Richard Dawkins;9;1
+BN60;Astrophysics for People in a Hurry;Neil deGrasse Tyson;9;1
+BN61;The Innovators: Created the Digital;Walter Isaacson;10;1
+BN62;Steve Jobs;Walter Isaacson;8;1
+BN63;The Power of Now;Eckhart Tolle;11;1
+BN64;Girl, Wash Your Face;Rachel Hollis;11;1
+BN65;The Subtle Art of Not Giving a F*ck;Mark Manson;11;1
+BN66;Educated;Tara Westover;8;1
+BN67;Leonardo da Vinci;Walter Isaacson;8;1
+BN68;Becoming;Michelle Obama;8;1
+BN69;The Feynman Lectures on Physics;Richard P. Feynman;9;1
+BN70;The Road Less Traveled;M. Scott Peck;11;1
+BN71;The Art of War;Sun Tzu;11;1
+BN72;The Four Agreements;Don Miguel Ruiz;11;1
+BN73;The 48 Laws of Power;Robert Greene;11;1
+BN74;Quiet: The Power of Introverts ;Susan Cain;11;1
+BN75;Outliers: The Story of Success;Malcolm Gladwell;11;1
+BN76;The Alchemy of Finance;George Soros;9;1
+BN77;The Tipping Point;Malcolm Gladwell;11;1
+BN78;The Fifth Risk;Michael Lewis;9;1
+BN79;The C++ Programming Language;Bjarne Stroustrup;10;1
+BN80;Clean Code: A Handbook;Robert C. Martin;10;1
+BN81;The Phoenix Project;Gene Kim;10;1
+BN82;The Design of Everyday Things;Don Norman;10;1
+BN83;Eloquent JavaScript;Marijn Haverbeke;10;1
+BN84;The Lean Startup;Eric Ries;10;1
+BN85;The Mythical Man-Month;Frederick P. Brooks Jr.;10;1
+BN86;The Emperor of All Maladies;Siddhartha Mukherjee;9;1
+BN87;The Structure of Scientific Revolutions;Thomas S. Kuhn;9;1
+BN88;The Innovator's Dilemma: ;Clayton Christensen;9;1
+BN89;The Gene: An Intimate History;Siddhartha Mukherjee;9;1
+BN90;Sapiens: A Graphic History;Yuval Noah Harari;4;1
+BN91;The Sandman;Neil Gaiman;4;1
+BN92;Maus;Art Spiegelman;4;1
+BN93;Persepolis;Marjane Satrapi;4;1
+BN94;Religion for Atheists;Alain de Botton;5;1
+BN95;The Case for Christ;Lee Strobel;5;1
+BN96;The Bhagavad Gita;Various;5;1
+BN97;A History of God;Karen Armstrong;5;1
+BN98;Modern Romance;Aziz Ansari;7;1
+BN99;The Notebook;Nicholas Sparks;7;1
+BN100;Me Before You;Jojo Moyes;7;1

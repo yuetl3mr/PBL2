@@ -1,0 +1,1 @@
+Add phan tu moi : tao mang copy phan tu cu + cap phat mang moi (n+1) -> giai phong mang cu
