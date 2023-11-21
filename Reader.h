@@ -18,4 +18,5 @@ class Reader{
         //overload operator 
         friend istream& operator>>(istream&, Reader&);
         friend const ostream& operator<<(ostream&, const Reader&);
+        friend const string& ReaderInfo(const Reader&);
 };

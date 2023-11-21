@@ -20,17 +20,16 @@ Reader::~Reader()
 }
 
 istream& operator>>(istream& inp, Reader& NewReader){
-    //tm* Time = localtime(&now);
     string tmp = "";
     cout << "\t------------------------\n";
     cout << "\tHo va ten : "; 
     while ( !(getline(inp, NewReader.Name)) || NewReader.Name == ""){
         cout << "\tTen khong duoc de trong, vui long nhap lai : ";
     }
-    cout << "\tNam sinh : ";
-    while ((!getline(inp, tmp) || tmp == "") && stoi(tmp) ){
+    // cout << "\tNam sinh : ";
+    // while ((!getline(inp, tmp) || tmp == "") && stoi(tmp) ){
         
-    }
+    // }
     cout << "\tGioi tinh (0 hoac 1) : "; 
     while (!(inp >> NewReader.Gender) || NewReader.Gender != 1 && NewReader.Gender != 0){
         cout << "\tGioi tinh khong hop le, vui long nhap lai : ";
@@ -60,3 +59,6 @@ const ostream& operator<<(ostream& outp, const Reader& Reader){
     return outp;
 }
 
+const string& ReaderInfo(const Reader& R){
+    return R.ReaderNo;
+}

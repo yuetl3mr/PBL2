@@ -9,6 +9,7 @@ void FindBook();
 void PrintAllBook();
 void EditBooks();
 void ExitNoti();
+void AddLoan();
 
 void ExitNoti(){
     system("cls");
@@ -92,6 +93,48 @@ void AddReader(){
     return;
 }
 
+void AddLoan(){
+    Header();
+    cout << "\t======================================== Nhap thong tin muon sach ========================================\n";
+    cin.clear();
+    cin.ignore(123, '\n');
+    cout << "\tNhap ma doc gia : ";
+    string ReaderNo;
+    while (!(cin >> ReaderNo) || Management.IndexOfReader(ReaderNo) == -1){
+        cout << "\tKhong tim thay doc gia, vui long nhap lai : ";
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+    cout << "\tNhap so luong sach muon : ";
+    int addTotal;
+    while (!(cin >> addTotal) || addTotal < 1){
+        cout << "\tSo luong khong hop le, vui long nhap lai : ";
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+    cin.clear();
+    cin.ignore(123, '\n');
+    auto now = std::chrono::system_clock::now();
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+
+    for(int index = 0; index < addTotal; index++){
+        Header();
+        cout << "\t======================================== Nhap thong tin muon sach ========================================\n";
+        Loan NewLoan(GetTotal(Management).Loan + 1, currentTime);        
+        cout << "\tNhap ma sach thu " << index + 1 << " : ";
+        string tmpBook;
+        while ( !(getline(cin, tmpBook)) || tmpBook == "" || Management.IndexOfBook(tmpBook) == -1 || !Management.isBookValid(tmpBook)){
+            cout << "\tKhong tim thay sach hoac sach da duoc muon, vui long nhap lai : ";
+        }
+        Management.Add(NewLoan);
+        cout << "\tDoc gia " << ReaderNo << " da muon sach " << tmpBook << " thanh cong - " << ctime(&currentTime) << "\t";
+        system("pause");
+    }
+    getchar();
+    MainMenu();
+    return;
+}
+
 void FindBook(){
     Header();
     cout << "\t============================================== Tra cuu sach ==============================================\n";
@@ -119,13 +162,13 @@ void EditBooks(){
     cout << "\t=========================================== Sua Thong Tin Sach ==========================================\n";
     cout << "\tNhap ma sach can sua: ";
     string Bno;
-    while ( !(cin >> Bno) || ( Management.IndexOf(Bno)) == -1 ){
+    while ( !(cin >> Bno) || ( Management.IndexOfBook(Bno)) == -1 ){
         cout << "\tKhong tim thay sach, vui long nhap lai : ";
         cin.clear();
         cin.ignore(123, '\n');
     }
     cout << "\tDang sua thong tin sach\n";
-    Management.EditBook(Management.IndexOf(Bno));
+    Management.EditBook(Management.IndexOfBook(Bno));
     cout << "\tSua thong tin sach thanh cong\n\t";
     system("Pause");
     MainMenu();
@@ -150,6 +193,9 @@ void MainMenu(){
         case '1':
             AddBook();
             break;
+        case '2':
+            AddLoan();
+            break;
         case '3':
             EditBooks();
             break;
@@ -168,7 +214,7 @@ void MainMenu(){
 int main(){
     Management.InputFromFile(1); // Nhap file Book
     Management.InputFromFile(2); // Nhap file Reader
-    Management.InputFromFile(2); // Nhap file Loan
+    Management.InputFromFile(3); // Nhap file Loan
     /*
         Them ham kiem tra tinh lien ket
     */

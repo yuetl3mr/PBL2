@@ -43,6 +43,10 @@ const string& BookInfo(const Book& B){
     return B.BookNo;
 }
 
+const bool& bookStatus(const Book& B){
+    return B.Status;
+}
+
 string Book::Index(const Book& tmpB){
     return tmpB.BookNo;
 }

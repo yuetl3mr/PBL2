@@ -99,8 +99,8 @@ void LMS::InputFromFile(int T){
             Add(InBook);
         }
     }else if (T == 2){
-        // input Readers
-        FileName = "Readers.txt";
+        // input Reader
+        FileName = "Reader.txt";
         ifstream fp(FileName);
         if(!fp.is_open()){
             cout << "     File " << FileName << " khong ton tai\n";
@@ -154,9 +154,17 @@ void LMS::InputFromFile(int T){
     }
 }
 
-int LMS::IndexOf(const string& BookNo){
+int LMS::IndexOfBook(const string& BookNo){
     for(int i = 0; i < this->BookTotal; i++){
         if (BookInfo(B[i]) == BookNo)  
+            return i;
+    }
+    return -1;
+}
+
+int LMS::IndexOfReader(const string& ReaderNo){
+    for(int i = 0; i < this->ReaderTotal; i++){
+        if (ReaderInfo(R[i]) == ReaderNo)  
             return i;
     }
     return -1;
@@ -182,6 +190,17 @@ void LMS::PrintLoan(){
 
 Total GetTotal(const LMS& tmp){
     return {tmp.BookTotal, tmp.ReaderTotal, tmp.LoanNo};
+}
+
+bool LMS::isBookValid(const string& BookNo){
+    for(int i = 0; i < this->BookTotal; i++){
+        if (BookInfo(B[i]) == BookNo){
+            if (bookStatus(B[i])){
+                return 1;
+            }
+        }  
+    }
+    return 0;
 }
 
 void LMS::EditBook(int index){

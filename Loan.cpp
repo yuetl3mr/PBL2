@@ -10,6 +10,10 @@ Loan::Loan(int no, string bno, string cno, time_t day)
 {
 }
 
+Loan::Loan(int no, time_t time)
+    : LoanNo(no), LoanDay(time)
+{}
+
 Loan::~Loan()
 {
 }
@@ -17,8 +21,7 @@ Loan::~Loan()
 istream& operator>>(istream& inp, Loan& Info){
     Info.LoanNo ++;
     Info.LoanDay = time(0);
-    cout << "Nhap ma so nguoi muon = "; inp >> Info.CustomerNo;
-    cout << "Nhap ma so sach muon = "; inp >> Info.BookNo;
+    cout << "Nhap ma so sach muon : "; inp >> Info.BookNo;
     // check tinh hop le
     return inp;
 }

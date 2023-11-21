@@ -8,8 +8,8 @@ struct Total{
     int Loan;
 };
 
-class LMS{
-    private:
+class LMS{  
+    protected:
         /*
         Thong tin admin
         */
@@ -28,15 +28,16 @@ class LMS{
         void InputFromFile(int);
         //book
         void Add(const Book&);
-        int IndexOf(const string&);
+        int IndexOfBook(const string&);
         void PrintBook();
         //Reader
         void Add(const Reader&);
         void Add(const Loan&);
         void PrintReader();
-        int IndexOf(const Reader&);
+        int IndexOfReader(const string&);
         void PrintLoan();
         friend Total GetTotal(const LMS&);
         void EditBook(int);
+        bool isBookValid(const string&);
         //......
 };

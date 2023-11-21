@@ -2,7 +2,7 @@
 using namespace std;
 
 class Book{
-    private:
+    protected:
         string BookNo;
         string Name;
         string Author;
@@ -22,6 +22,7 @@ class Book{
         friend istream& operator>>(istream&, Book&);
         friend const ostream& operator<<(ostream&, const Book&);
         friend const string& BookInfo(const Book&);
+        friend const bool& bookStatus(const Book&);
         string Index(const Book&);
         //...
 };
