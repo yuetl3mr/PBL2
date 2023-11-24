@@ -14,6 +14,8 @@ void PrintAllLoan();
 void EditBooks();
 void EditReader();
 void EditLoan();
+void analyzeData(); 
+void analyzeReader();
 void ExitNoti();
 void AddLoan();
 
@@ -39,8 +41,8 @@ void PrintAllBook(){
 
 void PrintAllReader(){
     Header();
-    cout << "\t======================================== Danh sach toan doc gia =========================================\n\n";
-    cout << "\tMa so   \tHo Va Ten\t\t    Gioi tinh\t        Ngay sinh\t       So Dien Thoai\n";
+    cout << "\t====================================== Danh sach toan bo doc gia =======================================\n\n";
+    cout << "\tMa so   \tHo Va Ten\t   Gioi tinh\t Ngay sinh\tSo Dien Thoai\t   Sach Dang Muon\n";
     cout << "\t---------------------------------------------------------------------------------------------------------\n";
     Management.PrintAllReader();
     system("pause");
@@ -83,7 +85,7 @@ void AddBook(){
         cout << "\tNhap thong tin sach " << tmpBookNo << " thanh cong\n\t";
         system("pause");
     }/*for ->so luong, add(newbook)*/
-    
+   // Management.OutputToFile(1);
     getchar();
     MainMenu();
     return;
@@ -222,6 +224,7 @@ void EditBook(){
         Last_BookNo = GetTotal(Management).Book + 1;
         // Xoa ca o bang Loan
     }
+    //Management.OutputToFile(1);
     system("Pause");
     MainMenu();
     return;
@@ -284,6 +287,52 @@ void EditLoan(){
     return;
 }
 
+void analyzeReader(){
+    Header();
+    cout << "\t================================================= Doc Gia =================================================\n";
+    Management.ReaderStatistics();
+    cout << "\n\t";
+    system("pause");
+}
+
+void analyzeBook(){
+    Header();
+    cout << "\t================================================= Sach =================================================\n";
+    Management.BookStatistics();
+    cout << "\n\t";
+    system("pause");
+}
+
+void analyzeData(){
+    Header();
+    cout << "\t================================================ Thong Ke ================================================\n";
+    cout << "\tThong ke doc gia                   : Nhan phim 1   ====  Thong ke sach                      : Nhan phim 2 \n";
+    cout << "\t                                   Nhan phim 0 de tro ve man hinh                                         \n";
+    cout << "\t==========================================================================================================\n";
+    getchar();
+    switch (getchar()){
+    case '0':
+        getchar();
+        MainMenu();
+        break;
+    case '1':
+        analyzeReader();
+        MainMenu();
+        break;
+    case '2':
+        analyzeBook();
+        MainMenu();
+        break;    
+    case '4':
+        MainMenu();
+        break;
+    default:
+        MainMenu();
+        break;
+    }
+    
+}
+
 void MainMenu(){
     system("cls");
     cout << "\t\t\t\t Library Management System - Chuong trinh quan ly thu vien\n";
@@ -294,7 +343,6 @@ void MainMenu(){
     cout << "\tTra cuu thong tin                  : Nhan phim 4   ====  Thong ke                           : Nhan phim 8 \n";
     cout << "\t                                   Nhan phim 0 de thoat chuong trinh                                      \n";
     cout << "\t==========================================================================================================\n";
-    // Them Thong Ke Sach, doc gia, ....
     switch( getchar() ){
         case '0':
             ExitNoti();
@@ -321,6 +369,7 @@ void MainMenu(){
             EditLoan();
             break;
         case '8': 
+            analyzeData();
             break;
         default:
             MainMenu();

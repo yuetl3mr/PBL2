@@ -52,3 +52,28 @@ const bool& bookStatus(const Book& B){
     return B.Status;
 }
 
+int Book::GetCategory(){
+    return Category;
+}
+
+bool Book::GetStatus(){
+    return Status;
+}
+
+void Book::printFile(){
+    string FileName = "Book.txt";
+    fstream fp(FileName);
+    if(!fp.is_open()){
+        cout << "     File " << FileName << " khong ton tai\n";
+    }
+    fp << BookNo;
+    fp << ";" ;
+    fp << Name;
+    fp << ";";
+    fp << Author;
+    fp << ";";
+    fp << Category;
+    fp << ";";
+    fp << Status << endl;
+    fp.close();
+}

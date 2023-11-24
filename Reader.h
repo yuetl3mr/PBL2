@@ -8,6 +8,7 @@ class Reader{
         string Name;
         time_t DoB;
         string Tel; 
+        bool Cur;
     public:
         //constructor
         Reader();
@@ -19,4 +20,6 @@ class Reader{
         friend istream& operator>>(istream&, Reader&);
         friend const ostream& operator<<(ostream&, const Reader&);
         friend const string& ReaderInfo(const Reader&);
+        int GetCur();
+        bool GetGender();
 };

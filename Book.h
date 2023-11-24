@@ -24,4 +24,8 @@ class Book{
         friend const string& BookInfo(const Book&);
         friend const bool& bookStatus(const Book&);
         //...
+        int GetCategory();
+        bool GetStatus();
+        void printFile();
+        
 };

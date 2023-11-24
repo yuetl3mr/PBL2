@@ -1,5 +1,8 @@
 #include "LMS.h"
 
+string BC[12] = 
+        {"Others", "Horror", "Fantasy", "Comics", "Religion", "History", 
+        "Romance", "Biography", "Sience", "Computer", "Self-Help", "Novel"};
 
 LMS::LMS()
     : BookTotal(0), ReaderTotal(0), LoanNo(0)
@@ -111,20 +114,20 @@ void LMS::InputFromFile(int T){
         string Name;
         time_t DoB;
         string Tel;
-        bool LoanStatus;
+        bool Cur;
         while(getline(fp, INPUT)){
             istringstream iss(INPUT);
             getline(iss, ReaderNo, ';');
-            string tempGender, tempDoB, tempLoanStatus;
+            string tempGender, tempDoB, tempCur;
             getline(iss, tempGender, ';');
             Gender = (tempGender == "1");
             getline(iss, Name, ';');
             getline(iss, tempDoB, ';');
             DoB = std::stol(tempDoB);
             getline(iss, Tel, ';');
-            getline(iss, tempLoanStatus, ';');
-            LoanStatus = (tempLoanStatus == "1");
-            Reader NewReader(ReaderNo, Gender, Name, DoB, Tel, LoanStatus);
+            getline(iss, tempCur, ';');
+            Cur = (tempCur == "0") ? true : false;
+            Reader NewReader(ReaderNo, Gender, Name, DoB, Tel, Cur);
             Add(NewReader);
         }
     }else{
@@ -254,5 +257,72 @@ void LMS::PrintAllReader(){
 void LMS::PrintAllLoan(){
     for(int i = 0; i < LoanNo; i++){
         PrintLoan(i);
+    }
+}
+
+void LMS::ReaderStatistics(){
+        int totalReaders = ReaderTotal;
+        int maleReaders = 0, femaleReaders = 0;
+        int borrowers = 0, totalLoans = 0;
+        for (int i = 0; i < ReaderTotal; ++i) {
+            if (R[i].GetGender()) {
+                maleReaders++;
+            } else {
+                femaleReaders++;
+            }
+            if (R[i].GetCur()) {
+                borrowers++;
+            }
+        }
+        double malePercentage = static_cast<double>(maleReaders) / totalReaders * 100.0;
+        double femalePercentage = static_cast<double>(femaleReaders) / totalReaders * 100.0;
+        double borrowingRate = (totalReaders > 0) ? static_cast<double>(borrowers) / ReaderTotal * 100.0 : 0;
+        cout << "\tTi le doc gia nam : " << fixed << setprecision(4) << malePercentage << endl;
+        cout << "\tTi le doc gia nu : " << fixed << setprecision(4) << femalePercentage << endl;
+        cout << "\tTi le doc gia dang muon sach : " << setprecision(4) << borrowingRate << endl;
+        cout << "\tTi le doc gia khong muon sach :" << 100.0 - borrowingRate << endl;
+        cout << "\tTong so nguoi dang muon sach: " << borrowers;
+
+}
+
+void LMS::BookStatistics(){
+    int available, unavailable;
+    int Count[12];    
+    for(int index = 0 ; index < 12; index ++){
+        Count[index] = 0;
+    }
+    for (int index = 0; index < BookTotal; index ++){
+        if (B[index].GetStatus()){
+            available++;  
+        } else {
+            unavailable++;
+        }
+        if (B[index].GetCategory() > 0 && B[index].GetCategory() < 12){
+            Count[B[index].GetCategory()]++; 
+        }
+    }
+    double AP = (BookTotal > 0) ? static_cast<double>(available) / BookTotal * 100.0 : 0;
+    cout << "\tTong so sach co san : " << available << endl;
+    cout << "\tTong so dang duoc muon : " << unavailable << endl;
+    cout << "\tTi le sach co san : " << fixed << setprecision(4) << AP << endl;
+    cout << "\tTi le sach dang duoc muon : " << fixed << setprecision(4) << 100.0 - AP << endl;
+    cout << "\tTi le sach thuoc tung danh muc : \n";
+    for(int index = 0; index < 12; index ++){
+        cout << "\t" << BC[index] << " : ";
+        cout << fixed << setprecision(4) << static_cast<double>(Count[index]) / BookTotal * 100.0 << endl;
+    }
+}
+
+void LMS::OutputToFile(int T){
+    if (T == 1){
+        for(int index = 0; index < BookTotal; index ++){
+            B[index].printFile();
+        }
+    }else if (T == 2){
+        
+    
+    }else{
+        // input Loan
+       
     }
 }

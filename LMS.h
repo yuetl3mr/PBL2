@@ -23,6 +23,7 @@ class LMS{
         //deconstrutor
         ~LMS();
         void InputFromFile(int);
+        void OutputToFile(int);
         //book
         void Add(const Book&);
         int IndexOfBook(const string&);
@@ -46,4 +47,6 @@ class LMS{
         void PrintAllLoan();
         void EditLoan(int);
         void DeleteLoan(int);
+        void ReaderStatistics();
+        void BookStatistics();
 };
