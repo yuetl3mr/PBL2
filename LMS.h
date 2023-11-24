@@ -29,15 +29,18 @@ class LMS{
         bool isBookValid(const string&);
         void PrintBook(int);
         void PrintAllBook();
-        string GetBookNo(int);
         //Reader
         void Add(const Reader&);
         void Add(const Loan&);
-        void PrintReader();
+        void PrintReader(int);
+        void PrintAllReader();
         int IndexOfReader(const string&);
         void PrintLoan();
         friend Total GetTotal(const LMS&);
         void EditBook(int);
+        void EditReader(int);
         void DeleteBook(int);
+        void DeleteReader(int);
         //......
+        string BookNo(int);
 };

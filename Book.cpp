@@ -52,7 +52,6 @@ const bool& bookStatus(const Book& B){
     return B.Status;
 }
 
-string Index(const Book& tmpB){
-    return tmpB.BookNo;
+string Book::GetBookNo(){
+    return BookNo;
 }
-

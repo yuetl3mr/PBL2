@@ -180,10 +180,8 @@ void LMS::PrintAllBook(){
     }
 }
 
-void LMS::PrintReader(){
-    for(int i = 0; i < ReaderTotal; i++){
-        cout << R[i];
-    }
+void LMS::PrintReader(int index){
+        cout << R[index];
 }
 
 void LMS::PrintLoan(){
@@ -211,6 +209,10 @@ void LMS::EditBook(int index){
     cin >> B[index];
 }
 
+void LMS::EditReader(int index){
+    cin >> R[index];
+}
+
 void LMS::DeleteBook(int index){
     for (int i = index; i < this->BookTotal - 1; i++) {
         this->B[i] = this->B[i + 1];
@@ -218,6 +220,19 @@ void LMS::DeleteBook(int index){
     --this->BookTotal;
 }
 
-string LMS::GetBookNo(int index){
-    return Index(B[index]);
+void LMS::DeleteReader(int index){
+    for (int i = index; i < this->ReaderTotal - 1; i++) {
+        this->R[i] = this->R[i + 1];
+    }
+    --this->ReaderTotal;
+}
+
+void LMS::PrintAllReader(){
+    for(int i = 0; i < ReaderTotal; i++){
+        PrintReader(i);
+    }
+}
+
+string LMS::BookNo(int index){
+    return B[index].GetBookNo();
 }

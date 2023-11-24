@@ -1,13 +1,17 @@
 #include "LMS.h"
 LMS Management;
 
+int Last_BookNo = 0;
+
 void Header();
 void MainMenu();
 void AddBook();
 void AddReader();
 void FindBook();
 void PrintAllBook();
+void PrintAllReader();
 void EditBooks();
+void EditReader();
 void ExitNoti();
 void AddLoan();
 
@@ -31,6 +35,15 @@ void PrintAllBook(){
     system("pause");
 }
 
+void PrintAllReader(){
+    Header();
+    cout << "\t======================================== Danh sach toan doc gia =========================================\n\n";
+    cout << "\tMa so   \tHo Va Ten\t\t    Gioi tinh\t        Ngay sinh\t       So Dien Thoai\n";
+    cout << "\t---------------------------------------------------------------------------------------------------------\n";
+    Management.PrintAllReader();
+    system("pause");
+}
+
 void Header(){
     system("cls");
     cout << "\t\t\t\t Library Management System - Chuong trinh quan ly thu vien\n";
@@ -50,11 +63,12 @@ void AddBook(){
         system("cls");
         Header();
         cout << "\t========================================== Nhap thong tin sach ==========================================\n";
-        string tmpBookNo = to_string(GetTotal(Management).Book);
+        string tmpBookNo = "BN" + to_string(Last_BookNo + 1);
         Book NewBook(tmpBookNo);
         cout << "\tNhap thong tin sach " << index + 1 << "\n";
         cin >> NewBook;
         Management.Add(NewBook);
+        Last_BookNo++;
         cout << "\tNhap thong tin sach " << tmpBookNo << " thanh cong\n\t";
         system("pause");
     }/*for ->so luong, add(newbook)*/
@@ -136,10 +150,10 @@ void AddLoan(){
     return;
 }
 
-void FindBook(){
+void Search(){
     Header();
-    cout << "\t============================================== Tra cuu sach ==============================================\n";
-    cout << "\tHien thi toan bo sach              : Nhan phim 1   ====  Tra cuu theo ten sach              : Nhan phim 4 \n";
+    cout << "\t================================================ Tra cuu =================================================\n";
+    cout << "\tHien thi toan bo sach              : Nhan phim 1   ====  Hien thi toan bo doc gia           : Nhan phim 4 \n";
     cout << "\tTra cuu theo trang thai            : Nhan phim 2   ====  Tra cuu theo tac gia               : Nhan phim 5 \n";
     cout << "\tTra cuu theo danh muc              : Nhan phim 3   ====  Tro ve man hinh chinh              : Nhan phim 0 \n";
     cout << "\t==========================================================================================================\n";
@@ -153,12 +167,16 @@ void FindBook(){
         PrintAllBook();
         MainMenu();
         break;
+    case '4':
+        PrintAllReader();
+        MainMenu();
+        break;
     default:
         break;
     }
 }
 
-void EditBooks(){
+void EditBook(){
     Header();
     cout << "\t=========================================== Sua Thong Tin Sach ==========================================\n";
     cout << "\tNhap ma sach can sua / xoa: ";
@@ -185,6 +203,43 @@ void EditBooks(){
     }else {
         Management.DeleteBook(Management.IndexOfBook(Bno));
         cout << "\tXoa sach thanh cong\n\t";
+        Last_BookNo = GetTotal(Management).Book + 1;
+        // Xoa ca o bang Loan
+    }
+    system("Pause");
+    MainMenu();
+    return;
+}
+
+void EditReader(){
+    Header();
+    cout << "\t========================================== Sua Thong Tin Doc Gia =========================================\n";
+    cout << "\tNhap ma doc gia can sua / xoa: ";
+    string RdNo;
+    while ( !(cin >> RdNo) || ( Management.IndexOfReader(RdNo)) == -1 ){
+        cout << "\tKhong tim thay doc gia, vui long nhap lai : ";
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+    Header();
+    cout << "\t========================================== Sua Thong Tin Doc Gia =========================================\n";
+    cout << "\tDang sua thong tin doc gia\n";
+    cout << "\tNhan phim 1 de sua thong tin, nhan phim 2 de xoa : ";
+    int tmp = 0;
+    while(!(cin >> tmp) || (tmp != 1 && tmp != 2)){
+        cout << "\tNhan phim 1 de sua thong tin sach, nhan phim 2 de xoa : ";
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+    if (tmp == 1){
+        cin.clear();
+        cin.ignore(123, '\n');
+        Management.EditReader(Management.IndexOfReader(RdNo));
+        cout << "\tSua thong tin doc gia thanh cong\n\t";
+    }else {
+        Management.DeleteReader(Management.IndexOfReader(RdNo));
+        cout << "\tXoa doc gia thanh cong\n\t";
+        Last_BookNo = GetTotal(Management).Book + 1;
         // Xoa ca o bang Loan
     }
     system("Pause");
@@ -214,13 +269,16 @@ void MainMenu(){
             AddLoan();
             break;
         case '3':
-            EditBooks();
+            EditBook();
             break;
         case '4':
-            FindBook();
+            Search();
             break;
         case '5':
             AddReader();
+            break;
+        case '6':
+            EditReader();
             break;
         default:
             MainMenu();
@@ -232,6 +290,7 @@ int main(){
     Management.InputFromFile(1); // Nhap file Book
     Management.InputFromFile(2); // Nhap file Reader
     Management.InputFromFile(3); // Nhap file Loan
+    Last_BookNo = GetTotal(Management).Book;
     /*
         Them ham kiem tra tinh lien ket
     */

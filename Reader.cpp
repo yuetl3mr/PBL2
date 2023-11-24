@@ -47,15 +47,15 @@ istream& operator>>(istream& inp, Reader& NewReader){
 
 const ostream& operator<<(ostream& outp, const Reader& Reader){
     tm* Time = localtime(&Reader.DoB);
-    cout << "Ma so nguoi dung = "; outp << Reader.ReaderNo;
-    cout << "\nHo va ten = "; outp << Reader.Name;
-    cout << "\nNgay sinh = ";
-    outp << Time->tm_mday; cout <<"/";
+    cout << "\t"; outp << Reader.ReaderNo <<"\t";
+    cout << "\t"; outp << setw(25) << left << Reader.Name; 
+    cout << "\t"; outp << setw(15) << left << Reader.Gender;
+    cout << "\t"; outp << Time->tm_mday; cout <<"/";
     outp << 1 + Time->tm_mon; cout <<"/";
     outp << 1900 + Time->tm_year; 
-    cout << "\nGioi tinh = "; outp << Reader.Gender;
-    cout << "\nSo dien thoai = "; outp << Reader.Tel;
-    cout << endl << endl;
+    cout << setw(10) << left << "";
+    cout << "\t"; outp << Reader.Tel; //note
+    cout << endl;
     return outp;
 }
 

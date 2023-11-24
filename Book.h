@@ -23,6 +23,6 @@ class Book{
         friend const ostream& operator<<(ostream&, const Book&);
         friend const string& BookInfo(const Book&);
         friend const bool& bookStatus(const Book&);
-        friend string Index(const Book&);
+        string GetBookNo();
         //...
 };
