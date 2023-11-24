@@ -170,9 +170,13 @@ int LMS::IndexOfReader(const string& ReaderNo){
     return -1;
 }
 
-void LMS::PrintBook(){
+void LMS::PrintBook(int index){
+        cout << B[index];
+}
+
+void LMS::PrintAllBook(){
     for(int i = 0; i < BookTotal; i++){
-        cout << B[i];
+        PrintBook(i);
     }
 }
 
@@ -188,7 +192,7 @@ void LMS::PrintLoan(){
     }
 }
 
-Total GetTotal(const LMS& tmp){
+LMS::Total GetTotal(const LMS& tmp){
     return {tmp.BookTotal, tmp.ReaderTotal, tmp.LoanNo};
 }
 
@@ -205,4 +209,15 @@ bool LMS::isBookValid(const string& BookNo){
 
 void LMS::EditBook(int index){
     cin >> B[index];
+}
+
+void LMS::DeleteBook(int index){
+    for (int i = index; i < this->BookTotal - 1; i++) {
+        this->B[i] = this->B[i + 1];
+    }
+    --this->BookTotal;
+}
+
+string LMS::GetBookNo(int index){
+    return Index(B[index]);
 }

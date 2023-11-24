@@ -2,18 +2,15 @@
 #include "Reader.h"
 #include "Loan.h"
 
-struct Total{
-    int Book;
-    int Reader;
-    int Loan;
-};
+
 
 class LMS{  
     protected:
-        /*
-        Thong tin admin
-        */
-        // 
+        struct Total{
+        int Book;
+        int Reader;
+        int Loan;
+        };
         int BookTotal;
         int ReaderTotal;
         int LoanNo;
@@ -29,7 +26,10 @@ class LMS{
         //book
         void Add(const Book&);
         int IndexOfBook(const string&);
-        void PrintBook();
+        bool isBookValid(const string&);
+        void PrintBook(int);
+        void PrintAllBook();
+        string GetBookNo(int);
         //Reader
         void Add(const Reader&);
         void Add(const Loan&);
@@ -38,6 +38,6 @@ class LMS{
         void PrintLoan();
         friend Total GetTotal(const LMS&);
         void EditBook(int);
-        bool isBookValid(const string&);
+        void DeleteBook(int);
         //......
 };

@@ -25,7 +25,12 @@ istream& operator>>(istream& inp, Book& NewBook){
     inp.ignore(123, '\n');
     cout << "\tTen sach : "; getline(inp, NewBook.Name);
     cout << "\tTac gia : "; getline(inp, NewBook.Author);
-    cout << "\tDanh muc : "; inp >> NewBook.Category;
+    cout << "\tDanh muc : "; 
+    while (!(inp >> NewBook.Category) || NewBook.Category > 12 || NewBook.Category < 0){
+        cout << "\tDanh muc khong hop le, vui long nhap lai : ";
+        inp.clear();
+        inp.ignore(123, '\n');
+    }
     return inp;
 }
 
@@ -47,7 +52,7 @@ const bool& bookStatus(const Book& B){
     return B.Status;
 }
 
-string Book::Index(const Book& tmpB){
+string Index(const Book& tmpB){
     return tmpB.BookNo;
 }
 

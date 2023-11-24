@@ -27,7 +27,7 @@ void PrintAllBook(){
     cout << "\t======================================== Danh sach toan bo sach =========================================\n\n";
     cout << "\tMa so   \tTen sach\t\t\t  Tac Gia\t\t      Danh Muc\t   Trang thai\n";
     cout << "\t---------------------------------------------------------------------------------------------------------\n";
-    Management.PrintBook();
+    Management.PrintAllBook();
     system("pause");
 }
 
@@ -50,14 +50,15 @@ void AddBook(){
         system("cls");
         Header();
         cout << "\t========================================== Nhap thong tin sach ==========================================\n";
-        string tmpBookNo = "BN" + to_string(GetTotal(Management).Book + 1);
+        string tmpBookNo = to_string(GetTotal(Management).Book);
         Book NewBook(tmpBookNo);
         cout << "\tNhap thong tin sach " << index + 1 << "\n";
         cin >> NewBook;
         Management.Add(NewBook);
         cout << "\tNhap thong tin sach " << tmpBookNo << " thanh cong\n\t";
         system("pause");
-    }
+    }/*for ->so luong, add(newbook)*/
+    
     getchar();
     MainMenu();
     return;
@@ -160,16 +161,32 @@ void FindBook(){
 void EditBooks(){
     Header();
     cout << "\t=========================================== Sua Thong Tin Sach ==========================================\n";
-    cout << "\tNhap ma sach can sua: ";
+    cout << "\tNhap ma sach can sua / xoa: ";
     string Bno;
     while ( !(cin >> Bno) || ( Management.IndexOfBook(Bno)) == -1 ){
         cout << "\tKhong tim thay sach, vui long nhap lai : ";
         cin.clear();
         cin.ignore(123, '\n');
     }
+    Header();
+    cout << "\t=========================================== Sua Thong Tin Sach ==========================================\n";
     cout << "\tDang sua thong tin sach\n";
-    Management.EditBook(Management.IndexOfBook(Bno));
-    cout << "\tSua thong tin sach thanh cong\n\t";
+    Management.PrintBook(Management.IndexOfBook(Bno));
+    cout << "\tNhan phim 1 de sua thong tin, nhan phim 2 de xoa : ";
+    int tmp = 0;
+    while(!(cin >> tmp) || (tmp != 1 && tmp != 2)){
+        cout << "\tNhan phim 1 de sua thong tin sach, nhan phim 2 de xoa : ";
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+    if (tmp == 1){
+        Management.EditBook(Management.IndexOfBook(Bno));
+        cout << "\tSua thong tin sach thanh cong\n\t";
+    }else {
+        Management.DeleteBook(Management.IndexOfBook(Bno));
+        cout << "\tXoa sach thanh cong\n\t";
+        // Xoa ca o bang Loan
+    }
     system("Pause");
     MainMenu();
     return;
