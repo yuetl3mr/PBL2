@@ -1,7 +1,7 @@
 #include "LMS.h"
 LMS Management;
 
-int Last_BookNo = 0;
+int Last_BookNo, Last_LoanNo, Last_ReaderNo;
 
 void Header();
 void MainMenu();
@@ -10,8 +10,10 @@ void AddReader();
 void FindBook();
 void PrintAllBook();
 void PrintAllReader();
+void PrintAllLoan();
 void EditBooks();
 void EditReader();
+void EditLoan();
 void ExitNoti();
 void AddLoan();
 
@@ -41,6 +43,15 @@ void PrintAllReader(){
     cout << "\tMa so   \tHo Va Ten\t\t    Gioi tinh\t        Ngay sinh\t       So Dien Thoai\n";
     cout << "\t---------------------------------------------------------------------------------------------------------\n";
     Management.PrintAllReader();
+    system("pause");
+}
+
+void PrintAllLoan(){
+    Header();
+    cout << "\t================================== Danh sach toan giao dich muon sach ===================================\n\n";
+    cout << "\tMa so   \tMa Doc Gia\t       Ma Sach\t\t        Ngay Muon\t     Trang Thai\n";
+    cout << "\t---------------------------------------------------------------------------------------------------------\n";
+    Management.PrintAllLoan();
     system("pause");
 }
 
@@ -95,7 +106,7 @@ void AddReader(){
     for(int index = 0; index < addTotal; index++){
         Header();
         cout << "\t========================================= Nhap thong tin doc gia =========================================\n";
-        string tmpReaderNo = "BN" + to_string(GetTotal(Management).Reader + 1);
+        string tmpReaderNo = "BN" + to_string(Last_ReaderNo + 1);
         Reader NewReader(tmpReaderNo);
         cout << "\tNhap thong tin doc gia " << index + 1 << "\n";
         cin >> NewReader;
@@ -135,13 +146,14 @@ void AddLoan(){
     for(int index = 0; index < addTotal; index++){
         Header();
         cout << "\t======================================== Nhap thong tin muon sach ========================================\n";
-        Loan NewLoan(GetTotal(Management).Loan + 1, currentTime);        
         cout << "\tNhap ma sach thu " << index + 1 << " : ";
         string tmpBook;
         while ( !(getline(cin, tmpBook)) || tmpBook == "" || Management.IndexOfBook(tmpBook) == -1 || !Management.isBookValid(tmpBook)){
             cout << "\tKhong tim thay sach hoac sach da duoc muon, vui long nhap lai : ";
         }
+        Loan NewLoan(Last_LoanNo + 1, ReaderNo, tmpBook, currentTime, 1);    
         Management.Add(NewLoan);
+        Last_LoanNo++;
         cout << "\tDoc gia " << ReaderNo << " da muon sach " << tmpBook << " thanh cong - " << ctime(&currentTime) << "\t";
         system("pause");
     }
@@ -154,7 +166,7 @@ void Search(){
     Header();
     cout << "\t================================================ Tra cuu =================================================\n";
     cout << "\tHien thi toan bo sach              : Nhan phim 1   ====  Hien thi toan bo doc gia           : Nhan phim 4 \n";
-    cout << "\tTra cuu theo trang thai            : Nhan phim 2   ====  Tra cuu theo tac gia               : Nhan phim 5 \n";
+    cout << "\tHien thi toan bo phieu muon        : Nhan phim 2   ====  Tra cuu theo tac gia               : Nhan phim 5 \n";
     cout << "\tTra cuu theo danh muc              : Nhan phim 3   ====  Tro ve man hinh chinh              : Nhan phim 0 \n";
     cout << "\t==========================================================================================================\n";
     getchar();
@@ -167,6 +179,10 @@ void Search(){
         PrintAllBook();
         MainMenu();
         break;
+    case '2':
+        PrintAllLoan();
+        MainMenu();
+        break;    
     case '4':
         PrintAllReader();
         MainMenu();
@@ -239,9 +255,30 @@ void EditReader(){
     }else {
         Management.DeleteReader(Management.IndexOfReader(RdNo));
         cout << "\tXoa doc gia thanh cong\n\t";
-        Last_BookNo = GetTotal(Management).Book + 1;
+        Last_ReaderNo = GetTotal(Management).Reader + 1;
         // Xoa ca o bang Loan
     }
+    system("Pause");
+    MainMenu();
+    return;
+}
+
+void EditLoan(){
+    Header();
+    cout << "\t========================================= Xoa Thong Tin Muon Sach ========================================\n";
+    cout << "\tNhap phieu muon sach can xoa: ";
+    int LNo;
+    while ( !(cin >> LNo) || ( Management.IndexOfLoan(LNo)) == -1 ){
+        cout << "\tKhong tim ma muon, vui long nhap lai : ";
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+    Header();
+    cout << "\t========================================= Xoa Thong Tin Muon Sach ========================================\n";
+        Management.DeleteLoan(Management.IndexOfLoan(LNo));
+        cout << "\tXoa phieu muon thanh cong\n\t";
+        Last_LoanNo = GetTotal(Management).Loan + 1;
+        // Xoa ca o bang Loan
     system("Pause");
     MainMenu();
     return;
@@ -253,7 +290,7 @@ void MainMenu(){
     cout << "\t==========================================================================================================\n";
     cout << "\tNhap thong tin sach                : Nhan phim 1   ====  Nhap thong tin doc gia             : Nhan phim 5 \n";
     cout << "\tNhap thong tin muon sach           : Nhan phim 2   ====  Sua - xoa thong tin doc gia        : Nhan phim 6 \n";
-    cout << "\tSua - xoa thong tin sach           : Nhan phim 3   ====  Sua - xoa thong tin muon sach      : Nhan phim 7 \n";
+    cout << "\tSua - xoa thong tin sach           : Nhan phim 3   ====  Xoa thong tin muon sach            : Nhan phim 7 \n";
     cout << "\tTra cuu thong tin                  : Nhan phim 4   ====  Thong ke                           : Nhan phim 8 \n";
     cout << "\t                                   Nhan phim 0 de thoat chuong trinh                                      \n";
     cout << "\t==========================================================================================================\n";
@@ -280,6 +317,11 @@ void MainMenu(){
         case '6':
             EditReader();
             break;
+        case '7':
+            EditLoan();
+            break;
+        case '8': 
+            break;
         default:
             MainMenu();
             return;
@@ -291,6 +333,8 @@ int main(){
     Management.InputFromFile(2); // Nhap file Reader
     Management.InputFromFile(3); // Nhap file Loan
     Last_BookNo = GetTotal(Management).Book;
+    Last_LoanNo = GetTotal(Management).Loan;
+    Last_ReaderNo = GetTotal(Management).Reader;
     /*
         Them ham kiem tra tinh lien ket
     */

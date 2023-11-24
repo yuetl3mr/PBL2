@@ -5,14 +5,16 @@ class Loan
 {
 protected:
     int LoanNo;
-    string CustomerNo;
+    string ReaderNo;
     string BookNo;
     time_t LoanDay;
+    bool Status;
 public:
     Loan();
-    Loan(int, string, string, time_t);
+    Loan(int, string, string, time_t, bool);
     Loan(int, time_t);
     ~Loan();
+    friend int LoanInfo(const Loan&);
     friend istream& operator>>(istream&, Loan&);
     friend const ostream& operator<<(ostream&, const Loan&);
 };

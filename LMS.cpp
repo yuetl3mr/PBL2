@@ -148,7 +148,8 @@ void LMS::InputFromFile(int T){
             getline(iss, BookNo, ';');
             getline(iss, tempLoanDay, ';');
             LoanDay = stol(tempLoanDay);
-            Loan NewLoan(LoanNo, ReaderNo, BookNo, LoanDay);
+            Loan NewLoan(LoanNo, ReaderNo, BookNo, LoanDay, true);
+            //sua lai, add them trang thai
             Add(NewLoan);
         }
     }
@@ -170,6 +171,14 @@ int LMS::IndexOfReader(const string& ReaderNo){
     return -1;
 }
 
+int LMS::IndexOfLoan(const int& tmpL){
+    for(int i = 0; i < this->LoanNo; i++){
+        if (LoanInfo(L[i]) == tmpL)  
+            return i;
+    }
+    return -1;
+}
+
 void LMS::PrintBook(int index){
         cout << B[index];
 }
@@ -184,10 +193,8 @@ void LMS::PrintReader(int index){
         cout << R[index];
 }
 
-void LMS::PrintLoan(){
-    for(int i = 0; i < LoanNo; i++){
-        cout << L[i];
-    }
+void LMS::PrintLoan(int index){
+        cout << L[index];
 }
 
 LMS::Total GetTotal(const LMS& tmp){
@@ -213,9 +220,20 @@ void LMS::EditReader(int index){
     cin >> R[index];
 }
 
+void LMS::EditLoan(int index){
+    cin >> L[index];
+}
+
 void LMS::DeleteBook(int index){
     for (int i = index; i < this->BookTotal - 1; i++) {
         this->B[i] = this->B[i + 1];
+    }
+    --this->BookTotal;
+}
+
+void LMS::DeleteLoan(int index){
+    for (int i = index; i < this->LoanNo - 1; i++) {
+        this->L[i] = this->L[i + 1];
     }
     --this->BookTotal;
 }
@@ -233,6 +251,8 @@ void LMS::PrintAllReader(){
     }
 }
 
-string LMS::BookNo(int index){
-    return B[index].GetBookNo();
+void LMS::PrintAllLoan(){
+    for(int i = 0; i < LoanNo; i++){
+        PrintLoan(i);
+    }
 }

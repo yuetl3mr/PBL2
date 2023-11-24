@@ -52,6 +52,3 @@ const bool& bookStatus(const Book& B){
     return B.Status;
 }
 
-string Book::GetBookNo(){
-    return BookNo;
-}

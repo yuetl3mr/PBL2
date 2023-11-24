@@ -1,12 +1,12 @@
 #include "Loan.h"
 
 Loan::Loan()
-    : LoanNo(0), BookNo("NULL"), CustomerNo("NULL"), LoanDay(time(0))
+    : LoanNo(0), BookNo("NULL"), ReaderNo("NULL"), LoanDay(time(0)), Status(1)
 {
 }
 
-Loan::Loan(int no, string bno, string cno, time_t day)
-    : LoanNo(no), BookNo(bno), CustomerNo(cno), LoanDay(day)
+Loan::Loan(int no, string cno, string bno, time_t day, bool stt)
+    : LoanNo(no), BookNo(bno), ReaderNo(cno), LoanDay(day), Status(stt)
 {
 }
 
@@ -28,15 +28,22 @@ istream& operator>>(istream& inp, Loan& Info){
 
 const ostream& operator<<(ostream& outp, const Loan& Info){
     tm* Time = localtime(&Info.LoanDay);
-    cout << "Ma muon sach = "; outp << Info.LoanNo;
-    cout << "\nMa so nguoi muon = "; outp << Info.CustomerNo;
-    cout << "\nMa so sach muon = "; outp << Info.BookNo;
-    cout << "\nNgay muon = "; 
-    outp << Time->tm_mday; cout <<"/";
+    ////
+    cout << "\t"; outp << Info.LoanNo <<"\t   ";
+    cout << "\t"; outp << setw(17) << left << Info.ReaderNo;
+    cout << "\t"; outp << setw(17) << left << Info.BookNo;
+    cout << "\t"; outp << Time->tm_mday; cout <<"/";
     outp << 1 + Time->tm_mon; cout <<"/";
     outp << 1900 + Time->tm_year; 
-    cout << endl << endl;
+    cout << setw(10) << left << "";
+    cout << "\t"; outp << Info.Status; //note
+    cout << endl;
     return outp;
 }
+
+int LoanInfo(const Loan& L){
+    return L.LoanNo;
+}
+
 //Note : tinh thoi gian den han tra sach = giay -> time(0) - LoanTime
 //Update status (Book, Customer)

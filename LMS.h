@@ -26,6 +26,7 @@ class LMS{
         //book
         void Add(const Book&);
         int IndexOfBook(const string&);
+        int IndexOfLoan(const int&);
         bool isBookValid(const string&);
         void PrintBook(int);
         void PrintAllBook();
@@ -35,12 +36,14 @@ class LMS{
         void PrintReader(int);
         void PrintAllReader();
         int IndexOfReader(const string&);
-        void PrintLoan();
+        void PrintLoan(int);
         friend Total GetTotal(const LMS&);
         void EditBook(int);
         void EditReader(int);
         void DeleteBook(int);
         void DeleteReader(int);
         //......
-        string BookNo(int);
+        void PrintAllLoan();
+        void EditLoan(int);
+        void DeleteLoan(int);
 };
