@@ -2,8 +2,6 @@
 #include "Reader.h"
 #include "Loan.h"
 
-
-
 class LMS{  
     protected:
         struct Total{
@@ -38,6 +36,8 @@ class LMS{
         void PrintAllReader();
         int IndexOfReader(const string&);
         void PrintLoan(int);
+        void setStatus(int);
+        void setCur(int);
         friend Total GetTotal(const LMS&);
         void EditBook(int);
         void EditReader(int);

@@ -26,6 +26,6 @@ class Book{
         //...
         int GetCategory();
         bool GetStatus();
-        void printFile();
-        
+        string printFile();
+        void setStatus();       
 };

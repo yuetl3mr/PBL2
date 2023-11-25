@@ -20,16 +20,20 @@ Reader::~Reader()
 }
 
 istream& operator>>(istream& inp, Reader& NewReader){
+    std::tm timeInfo = {};
+    int day, month, year;   
     string tmp = "";
     cout << "\t------------------------\n";
     cout << "\tHo va ten : "; 
     while ( !(getline(inp, NewReader.Name)) || NewReader.Name == ""){
         cout << "\tTen khong duoc de trong, vui long nhap lai : ";
     }
-    // cout << "\tNam sinh : ";
-    // while ((!getline(inp, tmp) || tmp == "") && stoi(tmp) ){
-        
-    // }
+    cout << "\tNgay sinh (dd mm yyyy): ";
+    inp >> day >> month >> year;
+    timeInfo.tm_year = year - 1900; 
+    timeInfo.tm_mon = month - 1;
+    timeInfo.tm_mday = day;
+    NewReader.DoB = std::mktime(&timeInfo);
     cout << "\tGioi tinh (0 hoac 1) : "; 
     while (!(inp >> NewReader.Gender) || NewReader.Gender != 1 && NewReader.Gender != 0){
         cout << "\tGioi tinh khong hop le, vui long nhap lai : ";
@@ -70,4 +74,12 @@ int Reader::GetCur(){
 
 bool Reader::GetGender(){
     return Gender;
+}
+
+string Reader::printFile(){
+    return ReaderNo + ";" + to_string(Gender) + ";" + Name + ";" + to_string(DoB) + ";" + Tel + ";" + to_string(Cur);    
+}
+
+void Reader::SetCur(){
+    Cur = true;
 }

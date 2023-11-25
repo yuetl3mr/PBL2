@@ -21,5 +21,7 @@ class Reader{
         friend const ostream& operator<<(ostream&, const Reader&);
         friend const string& ReaderInfo(const Reader&);
         int GetCur();
+        void SetCur();
         bool GetGender();
+        string printFile();
 };

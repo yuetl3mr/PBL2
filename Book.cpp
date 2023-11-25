@@ -60,20 +60,10 @@ bool Book::GetStatus(){
     return Status;
 }
 
-void Book::printFile(){
-    string FileName = "Book.txt";
-    fstream fp(FileName);
-    if(!fp.is_open()){
-        cout << "     File " << FileName << " khong ton tai\n";
-    }
-    fp << BookNo;
-    fp << ";" ;
-    fp << Name;
-    fp << ";";
-    fp << Author;
-    fp << ";";
-    fp << Category;
-    fp << ";";
-    fp << Status << endl;
-    fp.close();
+string Book::printFile(){
+    return BookNo + ";" + Name + ";" + Author + ";" + to_string(Category) + ";" + to_string(Status);
+}
+
+void Book::setStatus(){
+    Status = false;
 }

@@ -17,5 +17,6 @@ public:
     friend int LoanInfo(const Loan&);
     friend istream& operator>>(istream&, Loan&);
     friend const ostream& operator<<(ostream&, const Loan&);
+    string printFile();
 };
 

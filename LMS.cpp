@@ -277,10 +277,10 @@ void LMS::ReaderStatistics(){
         double malePercentage = static_cast<double>(maleReaders) / totalReaders * 100.0;
         double femalePercentage = static_cast<double>(femaleReaders) / totalReaders * 100.0;
         double borrowingRate = (totalReaders > 0) ? static_cast<double>(borrowers) / ReaderTotal * 100.0 : 0;
-        cout << "\tTi le doc gia nam : " << fixed << setprecision(4) << malePercentage << endl;
-        cout << "\tTi le doc gia nu : " << fixed << setprecision(4) << femalePercentage << endl;
-        cout << "\tTi le doc gia dang muon sach : " << setprecision(4) << borrowingRate << endl;
-        cout << "\tTi le doc gia khong muon sach :" << 100.0 - borrowingRate << endl;
+        cout << "\tTi le doc gia nam : " << fixed << setprecision(4) << malePercentage << "%" << endl;
+        cout << "\tTi le doc gia nu : " << fixed << setprecision(4) << femalePercentage << "%" << endl;
+        cout << "\tTi le doc gia dang muon sach : " << setprecision(4) << borrowingRate << "%" << endl;
+        cout << "\tTi le doc gia khong muon sach :" << 100.0 - borrowingRate << "%" << endl;
         cout << "\tTong so nguoi dang muon sach: " << borrowers;
 
 }
@@ -304,25 +304,54 @@ void LMS::BookStatistics(){
     double AP = (BookTotal > 0) ? static_cast<double>(available) / BookTotal * 100.0 : 0;
     cout << "\tTong so sach co san : " << available << endl;
     cout << "\tTong so dang duoc muon : " << unavailable << endl;
-    cout << "\tTi le sach co san : " << fixed << setprecision(4) << AP << endl;
-    cout << "\tTi le sach dang duoc muon : " << fixed << setprecision(4) << 100.0 - AP << endl;
+    cout << "\tTi le sach co san : " << fixed << setprecision(4) << AP << "%" << endl;
+    cout << "\tTi le sach dang duoc muon : " << fixed << setprecision(4) << 100.0 - AP << "%" << endl;
     cout << "\tTi le sach thuoc tung danh muc : \n";
     for(int index = 0; index < 12; index ++){
         cout << "\t" << BC[index] << " : ";
-        cout << fixed << setprecision(4) << static_cast<double>(Count[index]) / BookTotal * 100.0 << endl;
+        cout << fixed << setprecision(4) << static_cast<double>(Count[index]) / BookTotal * 100.0 << "%" << endl;
     }
 }
 
 void LMS::OutputToFile(int T){
     if (T == 1){
-        for(int index = 0; index < BookTotal; index ++){
-            B[index].printFile();
-        }
-    }else if (T == 2){
-        
-    
-    }else{
-        // input Loan
-       
+        string FileName = "Book.txt";
+        ofstream fp(FileName);
+        if(!fp.is_open()){
+        cout << "     File " << FileName << " khong ton tai\n";
     }
+        for(int index = 0; index < BookTotal; index ++){
+            fp << B[index].printFile() << endl;
+        }
+        fp.close();
+    }else if (T == 2){
+        string FileName = "Loan.txt";
+        ofstream fp(FileName);
+        if(!fp.is_open()){
+        cout << "     File " << FileName << " khong ton tai\n";
+        }
+        for(int index = 0; index < LoanNo; index ++){
+            fp << L[index].printFile() << endl;
+        }
+        fp.close();
+    }else{
+        // input Reader
+        string FileName = "Reader.txt";
+        ofstream fp(FileName);
+        if(!fp.is_open()){
+        cout << "     File " << FileName << " khong ton tai\n";
+        }
+        for(int index = 0; index < ReaderTotal; index ++){
+            fp << R[index].printFile() << endl;
+        }
+        fp.close();
+    }
+}
+
+void LMS::setStatus(int index){
+    B[index].setStatus();
+}
+
+void LMS::setCur(int index){
+    R[index].SetCur();
 }

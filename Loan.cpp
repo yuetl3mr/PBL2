@@ -45,5 +45,9 @@ int LoanInfo(const Loan& L){
     return L.LoanNo;
 }
 
+string Loan::printFile(){
+    return to_string(LoanNo) + ";" + ReaderNo + ";" + BookNo + ";" + to_string(LoanDay) + ";" + to_string(Status);
+}
+
 //Note : tinh thoi gian den han tra sach = giay -> time(0) - LoanTime
 //Update status (Book, Customer)
