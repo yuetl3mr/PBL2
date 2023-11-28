@@ -20,3 +20,9 @@ public:
     string printFile();
 };
 
+class LoanGroup : public Loan{
+    private:
+    int Total;
+};
+
+

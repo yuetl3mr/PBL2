@@ -7,14 +7,15 @@ class Book{
         string Name;
         string Author;
         int Category;
-        bool Status;
+        int Avalible;
+        int Total;
         string BookCategory[12] = 
         {"Others", "Horror", "Fantasy", "Comics", "Religion", "History", 
         "Romance", "Biography", "Sience", "Computer", "Self-Help", "Novel"};
     public:
         //constructor
         Book();
-        Book(string, string, string, int, bool);
+        Book(string, string, string, int, int);
         Book(string);
         //deconstructor
         ~Book();
@@ -22,10 +23,11 @@ class Book{
         friend istream& operator>>(istream&, Book&);
         friend const ostream& operator<<(ostream&, const Book&);
         friend const string& BookInfo(const Book&);
-        friend const bool& bookStatus(const Book&);
         //...
         int GetCategory();
-        bool GetStatus();
+        int getTotal();
+        friend const int getAvali(const Book&);
+        int getAvali();
         string printFile();
-        void setStatus();       
+        void setAvali(bool);       
 };

@@ -157,7 +157,7 @@ void AddLoan(){
         Loan NewLoan(Last_LoanNo + 1, ReaderNo, tmpBook, currentTime, 1);    
         Management.Add(NewLoan);
         Last_LoanNo++;
-        Management.setStatus(Management.IndexOfBook(tmpBook));
+        Management.setAvali(Management.IndexOfBook(tmpBook));
         Management.setCur(Management.IndexOfReader(ReaderNo));
         cout << "\tDoc gia " << ReaderNo << " da muon sach " << tmpBook << " thanh cong - " << ctime(&currentTime) << "\t";
         system("pause");
@@ -343,7 +343,7 @@ void analyzeData(){
 
 void MainMenu(){
     system("cls");
-        cout << "\t\t\t\t Library Management System - Chuong trinh quan ly thu vien\n";
+    cout << "\t\t\t\t Library Management System - Chuong trinh quan ly thu vien\n";
     cout << "\t==========================================================================================================\n";
     cout << "\tNhap thong tin sach                : Nhan phim 1   ====  Nhap thong tin doc gia             : Nhan phim 5 \n";
     cout << "\tNhap thong tin muon sach           : Nhan phim 2   ====  Sua - xoa thong tin doc gia        : Nhan phim 6 \n";

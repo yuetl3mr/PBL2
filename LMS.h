@@ -36,7 +36,7 @@ class LMS{
         void PrintAllReader();
         int IndexOfReader(const string&);
         void PrintLoan(int);
-        void setStatus(int);
+        void setAvali(int);
         void setCur(int);
         friend Total GetTotal(const LMS&);
         void EditBook(int);

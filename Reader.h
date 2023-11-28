@@ -9,6 +9,7 @@ class Reader{
         time_t DoB;
         string Tel; 
         bool Cur;
+        // int Cur -> so sach dang muon -> quan ly
     public:
         //constructor
         Reader();

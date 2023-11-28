@@ -1,4 +1,8 @@
-- Gioi han so sach / nguoi muon
-- Tra sach
+- Gioi han so sach / nguoi muon -> doi Cur tu bool sang int de quan ly
+- Tra sach avali ++; -> them chuc nang doi trang thai Loan (tra sach) -> hien thi bang Loan de chon hoac nhap ma 
 - Tim kiem 
-- Them class sach muon
+- T̶h̶e̶m̶ ̶c̶l̶a̶s̶s̶ ̶s̶a̶c̶h̶ ̶m̶u̶o̶n̶  -> check tmp.txt
+- Add Loan thu cong 
+
+
+- GUI maybe

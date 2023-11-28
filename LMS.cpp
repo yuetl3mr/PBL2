@@ -207,7 +207,7 @@ LMS::Total GetTotal(const LMS& tmp){
 bool LMS::isBookValid(const string& BookNo){
     for(int i = 0; i < this->BookTotal; i++){
         if (BookInfo(B[i]) == BookNo){
-            if (bookStatus(B[i])){
+            if ((B[i]).getAvali() > 0){
                 return 1;
             }
         }  
@@ -292,11 +292,8 @@ void LMS::BookStatistics(){
         Count[index] = 0;
     }
     for (int index = 0; index < BookTotal; index ++){
-        if (B[index].GetStatus()){
-            available++;  
-        } else {
-            unavailable++;
-        }
+        available += B[index].getAvali();
+        unavailable += B[index].getTotal() - B[index].getAvali();
         if (B[index].GetCategory() > 0 && B[index].GetCategory() < 12){
             Count[B[index].GetCategory()]++; 
         }
@@ -348,8 +345,8 @@ void LMS::OutputToFile(int T){
     }
 }
 
-void LMS::setStatus(int index){
-    B[index].setStatus();
+void LMS::setAvali(int index){
+    B[index].setAvali(true);
 }
 
 void LMS::setCur(int index){
