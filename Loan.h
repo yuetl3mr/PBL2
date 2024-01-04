@@ -18,11 +18,13 @@ public:
     friend istream& operator>>(istream&, Loan&);
     friend const ostream& operator<<(ostream&, const Loan&);
     string printFile();
+    string getReader();
+    string getBook();
+    void setStatus();
+    bool getStatus();
+    void isoverDue();
 };
 
-class LoanGroup : public Loan{
-    private:
-    int Total;
-};
+
 
 

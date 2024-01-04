@@ -8,13 +8,13 @@ class Reader{
         string Name;
         time_t DoB;
         string Tel; 
-        bool Cur;
+        int Cur;
         // int Cur -> so sach dang muon -> quan ly
     public:
         //constructor
         Reader();
         Reader(string);
-        Reader(string, bool, string, time_t, string, bool);
+        Reader(string, bool, string, time_t, string, int);
         //deconstructor
         ~Reader();
         //overload operator 
@@ -22,7 +22,8 @@ class Reader{
         friend const ostream& operator<<(ostream&, const Reader&);
         friend const string& ReaderInfo(const Reader&);
         int GetCur();
-        void SetCur();
+        void SetCur(bool);
         bool GetGender();
         string printFile();
+        string getName();
 };

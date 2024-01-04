@@ -1,32 +1,32 @@
-BN1;To Kill a Mockingbird;Harper Lee;5;2;2
-BN2;4;4984;George Orwell;5;2;2
+BN1;To Kill a Mockingbird;Harper Lee;5;5;1
+BN2;4984;George Orwell;5;2;2
 BN3;The Great Gatsby;F. Scott Fitzgerald;5;4;4
 BN4;Pride and Prejudice;Jane Austen;5;2;2
 BN5;The Catcher in the Rye;J.D. Salinger;5;4;4
-BN6;Animal Farm;George Orwell;5;2;2
+BN6;Animal Farm;George Orwell;5;2;1
 BN7;Brave New World;Aldous Huxley;5;4;4
-BN8;The Lord of the Rings;J.R.R. Tolkien;3;4;4
-BN9;The Hobbit;J.R.R. Tolkien;3;4;4
-BN10;The Chronicles of Narnia;C.S. Lewis;3;4;4
+BN8;The Lord of the Rings;J.R.R. Tolkien;0;4;3
+BN9;The Hobbit;J.R.R. Tolkien;0;4;4
+BN10;The Chronicles of Narnia;C.S. Lewis;3;4;3
 BN11;The Little Prince;Antoine de Saint-Exupéry;5;4;4
 BN12;Harry Potter and the Sorcerer's Stone;J.K. Rowling;3;2;2
-BN13;The Hobbit;J.R.R. Tolkien;3;4;4
+BN13;The Hobbit;J.R.R. Tolkien;1;4;4
 BN14;The Da Vinci Code;Dan Brown;5;4;4
-BN15;The Alchemist;Paulo Coelho;5;2;2
+BN15;The Alchemist;Paulo Coelho;1;2;2
 BN16;A Tale of Two Cities;Charles Dickens;5;4;4
-BN17;Moby-Dick;Herman Melville;5;4;4
+BN17;Moby-Dick;Herman Melville;1;4;4
 BN18;The Grapes of Wrath;John Steinbeck;5;4;4
-BN19;Wuthering Heights;Emily Brontë;5;4;4
+BN19;Wuthering Heights;Emily Brontë;11;5;4
 BN20;Frankenstein;Mary Shelley;2;4;4
-BN21;The Picture of Dorian Gray;Oscar Wilde;5;2;2
-BN22;War and Peace;Leo Tolstoy;5;2;2
+BN21;The Picture of Dorian Gray;Oscar Wilde;5;3;2
+BN22;War and Peace;Leo Tolstoy;10;2;2
 BN23;The Adventures of Huckleberry Finn;Mark Twain;5;4;4
 BN24;Dracula;Bram Stoker;2;4;4
 BN25;One Hundred Years of Solitude;Gabriel García Márquez;5;2;2
 BN26;The Sun Also Rises;Ernest Hemingway;5;4;4
 BN27;The Canterbury Tales;Geoffrey Chaucer;5;2;2
 BN28;Les Misérables;Victor Hugo;5;2;2
-BN29;Anna Karenina;Leo Tolstoy;5;2;2
+BN29;Anna Karenina;Leo Tolstoy;5;3;1
 BN30;The Count of Monte Cristo;Alexandre Dumas;5;2;2
 BN31;The Scarlet Letter;Nathaniel Hawthorne;5;4;4
 BN32;The Divine Comedy;Dante Alighieri;5;4;4
@@ -35,8 +35,8 @@ BN34;The Iliad;Homer;5;4;4
 BN35;The Odyssey;Homer;5;4;4
 BN36;Crime and Punishment;Fyodor Dostoevsky;5;4;4
 BN37;The Brothers Karamazov;Fyodor Dostoevsky;5;4;4
-BN38;Great Expectations;Charles Dickens;5;4;4
-BN39;Jane Eyre;Charlotte Brontë;5;4;4
+BN38;Great Expectations;Charles Dickens;5;4;3
+BN39;Jane Eyre;Charlotte Brontë;5;4;3
 BN40;Sense and Sensibility;Jane Austen;5;4;4
 BN41;Alice's Adventures in Wonderland;Lewis Carroll;3;4;4
 BN42;The War of the Worlds;H.G. Wells;5;4;4
@@ -52,49 +52,51 @@ BN51;The Help;Kathryn Stockett;6;4;4
 BN52;The Shining;Stephen King;2;4;4
 BN53;The Stand;Stephen King;2;4;4
 BN54;The Gunslinger;Stephen King;3;4;4
-BN55;Watchmen;Alan Moore;4;4;4
+BN55;Watchmen;Alan Moore;6;4;4
 BN56;The Bible;Various;5;4;4
 BN57;Sapiens: A Brief History of Humankind;Yuval Noah Harari;6;4;4
 BN58;A Short History of Nearly Everything;Bill Bryson;9;4;4
 BN59;The Selfish Gene;Richard Dawkins;9;4;4
 BN60;Astrophysics for People in a Hurry;Neil deGrasse Tyson;9;4;4
-BN61;The Innovators: Created the Digital;Walter Isaacson;4;40;2;2
+BN61;The Innovators: Created the Digital;Walter Isaacson;4;1;2
 BN62;Steve Jobs;Walter Isaacson;8;4;4
-BN63;The Power of Now;Eckhart Tolle;4;41;4;4
-BN64;Girl, Wash Your Face;Rachel Hollis;4;41;4;4
-BN65;The Subtle Art of Not Giving a F*ck;Mark Manson;4;41;2;2
+BN63;The Power of Now;Eckhart Tolle;4;4;1
+BN64;Girl, Wash Your Face;Rachel Hollis;4;4;1
+BN65;The Subtle Art of Not Giving a F*ck;Mark Manson;4;2;1
 BN66;Educated;Tara Westover;8;4;4
 BN67;Leonardo da Vinci;Walter Isaacson;8;4;4
 BN68;Becoming;Michelle Obama;8;4;4
 BN69;The Feynman Lectures on Physics;Richard P. Feynman;9;4;4
-BN70;The Road Less Traveled;M. Scott Peck;4;41;4;4
-BN71;The Art of War;Sun Tzu;4;41;4;4
-BN72;The Four Agreements;Don Miguel Ruiz;4;41;4;4
-BN73;The 48 Laws of Power;Robert Greene;4;41;4;4
-BN74;Quiet: The Power of Introverts ;Susan Cain;4;41;4;4
-BN75;Outliers: The Story of Success;Malcolm Gladwell;4;41;4;4
+BN70;The Road Less Traveled;M. Scott Peck;4;4;1
+BN71;The Art of War;Sun Tzu;4;4;1
+BN72;The Four Agreements;Don Miguel Ruiz;4;4;1
+BN73;The 48 Laws of Power;Robert Greene;4;4;1
+BN74;Quiet: The Power of Introverts ;Susan Cain;4;4;1
+BN75;Outliers: The Story of Success;Malcolm Gladwell;4;4;1
 BN76;The Alchemy of Finance;George Soros;9;4;4
-BN77;The Tipping Point;Malcolm Gladwell;4;41;4;4
+BN77;The Tipping Point;Malcolm Gladwell;4;4;1
 BN78;The Fifth Risk;Michael Lewis;9;4;4
-BN79;The C++ Programming Language;Bjarne Stroustrup;4;40;4;4
-BN80;Clean Code: A Handbook;Robert C. Martin;4;40;4;4
-BN81;The Phoenix Project;Gene Kim;4;40;4;4
-BN82;The Design of Everyday Things;Don Norman;4;40;4;4
-BN83;Eloquent JavaScript;Marijn Haverbeke;4;40;4;4
-BN84;The Lean Startup;Eric Ries;4;40;4;4
-BN85;The Mythical Man-Month;Frederick P. Brooks Jr.;4;40;4;4
+BN79;The C++ Programming Language;Bjarne Stroustrup;4;4;1
+BN80;Clean Code: A Handbook;Robert C. Martin;4;4;1
+BN81;The Phoenix Project;Gene Kim;4;4;1
+BN82;The Design of Everyday Things;Don Norman;4;4;1
+BN83;Eloquent JavaScript;Marijn Haverbeke;4;4;1
+BN84;The Lean Startup;Eric Ries;4;4;1
+BN85;The Mythical Man-Month;Frederick P. Brooks Jr.;4;4;1
 BN86;The Emperor of All Maladies;Siddhartha Mukherjee;9;4;4
 BN87;The Structure of Scientific Revolutions;Thomas S. Kuhn;9;4;4
 BN88;The Innovator's Dilemma: ;Clayton Christensen;9;4;4
 BN89;The Gene: An Intimate History;Siddhartha Mukherjee;9;4;4
-BN90;Sapiens: A Graphic History;Yuval Noah Harari;4;4;4
-BN91;The Sandman;Neil Gaiman;4;4;4
-BN92;Maus;Art Spiegelman;4;4;4
-BN93;Persepolis;Marjane Satrapi;4;4;4
+BN90;Sapiens: A Graphic History;Yuval Noah Harari;6;4;4
+BN91;The Sandman;Neil Gaiman;6;4;4
+BN92;Maus;Art Spiegelman;6;5;4
+BN93;Persepolis;Marjane Satrapi;6;5;4
 BN94;Religion for Atheists;Alain de Botton;5;4;4
 BN95;The Case for Christ;Lee Strobel;5;4;4
 BN96;The Bhagavad Gita;Various;5;4;4
 BN97;A History of God;Karen Armstrong;5;4;4
 BN98;Modern Romance;Aziz Ansari;7;4;4
-BN99;The Notebook;Nicholas Sparks;7;4;4
+BN99;The Notebook;Nicholas Sparks;7;4;3
 BN100;Me Before You;Jojo Moyes;7;4;4
+BN102;Before You 2;Jojo Moyes;7;4;4
+BN103;You 3;Jojo Moyes;7;4;4

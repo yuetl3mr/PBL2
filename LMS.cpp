@@ -87,18 +87,21 @@ void LMS::InputFromFile(int T){
         string INPUT;
         string BookNo, Title, Author;
         int Category;
-        bool Status;
+        int Total;
+        int Avalible;
         while(getline(fp, INPUT)){
             istringstream iss(INPUT);
             getline(iss, BookNo, ';');
             getline(iss, Title, ';');
             getline(iss, Author, ';');
-            string tempCategory, tempStatus;
+            string tempCategory, tempTotal, tempAvalible;
             getline(iss, tempCategory, ';');
             Category = stoi(tempCategory);
-            getline(iss, tempStatus, ';');  
-            Status = (tempStatus == "1");
-            Book InBook(BookNo, Title, Author, Category, Status);
+            getline(iss, tempTotal, ';');    
+            Total = stoi(tempTotal);
+            getline(iss, tempAvalible, ';');
+            Avalible = stoi(tempAvalible);
+            Book InBook(BookNo, Title, Author, Category, Total, Avalible);
             Add(InBook);
         }
     }else if (T == 2){
@@ -114,7 +117,7 @@ void LMS::InputFromFile(int T){
         string Name;
         time_t DoB;
         string Tel;
-        bool Cur;
+        int Cur;
         while(getline(fp, INPUT)){
             istringstream iss(INPUT);
             getline(iss, ReaderNo, ';');
@@ -123,10 +126,10 @@ void LMS::InputFromFile(int T){
             Gender = (tempGender == "1");
             getline(iss, Name, ';');
             getline(iss, tempDoB, ';');
-            DoB = std::stol(tempDoB);
+            DoB = stol(tempDoB);
             getline(iss, Tel, ';');
             getline(iss, tempCur, ';');
-            Cur = (tempCur == "0") ? true : false;
+            Cur = stoi(tempCur);
             Reader NewReader(ReaderNo, Gender, Name, DoB, Tel, Cur);
             Add(NewReader);
         }
@@ -207,7 +210,7 @@ LMS::Total GetTotal(const LMS& tmp){
 bool LMS::isBookValid(const string& BookNo){
     for(int i = 0; i < this->BookTotal; i++){
         if (BookInfo(B[i]) == BookNo){
-            if ((B[i]).getAvali() > 0){
+            if (B[i].getAvali() > 0){
                 return 1;
             }
         }  
@@ -270,7 +273,7 @@ void LMS::ReaderStatistics(){
             } else {
                 femaleReaders++;
             }
-            if (R[i].GetCur()) {
+            if (R[i].GetCur() > 0) {
                 borrowers++;
             }
         }
@@ -280,25 +283,26 @@ void LMS::ReaderStatistics(){
         cout << "\tTi le doc gia nam : " << fixed << setprecision(4) << malePercentage << "%" << endl;
         cout << "\tTi le doc gia nu : " << fixed << setprecision(4) << femalePercentage << "%" << endl;
         cout << "\tTi le doc gia dang muon sach : " << setprecision(4) << borrowingRate << "%" << endl;
-        cout << "\tTi le doc gia khong muon sach :" << 100.0 - borrowingRate << "%" << endl;
-        cout << "\tTong so nguoi dang muon sach: " << borrowers;
+        cout << "\tTi le doc gia khong muon sach : " << 100.0 - borrowingRate << "%" << endl;
+        cout << "\tTong so nguoi dang muon sach : " << borrowers;
 
 }
 
 void LMS::BookStatistics(){
-    int available, unavailable;
+    int available, unavailable, Total;
     int Count[12];    
     for(int index = 0 ; index < 12; index ++){
         Count[index] = 0;
     }
     for (int index = 0; index < BookTotal; index ++){
         available += B[index].getAvali();
-        unavailable += B[index].getTotal() - B[index].getAvali();
+        Total += B[index].getTotal();
         if (B[index].GetCategory() > 0 && B[index].GetCategory() < 12){
             Count[B[index].GetCategory()]++; 
         }
     }
-    double AP = (BookTotal > 0) ? static_cast<double>(available) / BookTotal * 100.0 : 0;
+    unavailable = Total - available;
+    double AP = (Total > 0) ? static_cast<double>(available) / Total * 100.0 : 0;
     cout << "\tTong so sach co san : " << available << endl;
     cout << "\tTong so dang duoc muon : " << unavailable << endl;
     cout << "\tTi le sach co san : " << fixed << setprecision(4) << AP << "%" << endl;
@@ -345,10 +349,76 @@ void LMS::OutputToFile(int T){
     }
 }
 
-void LMS::setAvali(int index){
-    B[index].setAvali(true);
+void LMS::setAvali(int index, bool check){
+    if (check)
+        B[index].setAvali(true);
+    else
+        B[index].setAvali(false);
 }
 
-void LMS::setCur(int index){
-    R[index].SetCur();
+void LMS::setCur(int index, bool check){
+    if (check)
+        R[index].SetCur(true);
+    else R[index].SetCur(false);
+}
+
+void LMS::returnBook(int LoanNum){
+    setAvali(IndexOfBook(L[LoanNum].getBook()), false);
+    setCur(IndexOfReader(L[LoanNum].getReader()), false);
+    L[LoanNum].setStatus();
+}
+
+int LMS::getCur(int index){
+    return R[index].GetCur();
+}
+
+
+bool LMS::getStatus(int index){
+    return L[index].getStatus();
+}
+
+int LMS::SearchAuthor(string author){
+    int count = 0;
+    for(int index = 0; index < BookTotal; index ++){
+        if (B[index].FindAuthor(author)){
+            cout << B[index];
+            count++;
+        }
+    }
+    return count;
+}
+
+int LMS::SearchCate(int cate){
+    int count = 0;
+    for(int index = 0; index < BookTotal; index ++){
+        if (B[index].FindCate(cate)){
+            cout << B[index];
+            count++;
+        }
+    }
+    return count;
+}
+
+void LMS::printLoanForm(string reader, string book[], int bt, time_t ltime){
+    string FileName = "LoanForm.txt";
+    ofstream fp(FileName);
+    fp << "-----Phieu muon sach-----" << endl;
+    fp << "Ma doc gia : " << reader << endl;
+    fp << "Ten doc gia : " << R[IndexOfReader(reader)].getName() << endl;
+    fp << "Sach muon :" << endl;
+    for(int i = 0; i < bt; i++){
+        fp << i + 1 << ". " << B[IndexOfBook(book[i])].getName() << endl;
+    }
+    fp << "Ngay muon : " << ctime(&ltime);
+    ltime += 86400 * 60;
+    fp << "Han tra : " << ctime(&ltime);
+    fp.close();
+}
+
+void LMS::overdueBook(){
+    // check trang thai Loan
+    for(int i = 0; i < LoanNo; i++){
+        if(L[i].getStatus())
+            L[i].isoverDue();
+    }
 }

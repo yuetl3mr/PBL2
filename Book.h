@@ -15,7 +15,7 @@ class Book{
     public:
         //constructor
         Book();
-        Book(string, string, string, int, int);
+        Book(string, string, string, int, int, int);
         Book(string);
         //deconstructor
         ~Book();
@@ -26,8 +26,11 @@ class Book{
         //...
         int GetCategory();
         int getTotal();
-        friend const int getAvali(const Book&);
+        const int getAvali(const Book&);
         int getAvali();
         string printFile();
         void setAvali(bool);       
+        bool FindAuthor(string);
+        bool FindCate(int);
+        string getName();
 };

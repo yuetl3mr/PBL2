@@ -18,6 +18,14 @@ void analyzeData();
 void analyzeReader();
 void ExitNoti();
 void AddLoan();
+void returnBook();
+void SearchAuthor();
+void SearchCate();
+void overdueBook();
+
+string BookCate[12] = 
+        {"Others", "Horror", "Fantasy", "Comics", "Religion", "History", 
+        "Romance", "Biography", "Sience", "Computer", "Self-Help", "Novel"};
 
 void ExitNoti(){
     system("cls");
@@ -33,7 +41,7 @@ void ExitNoti(){
 void PrintAllBook(){
     Header();
     cout << "\t======================================== Danh sach toan bo sach =========================================\n\n";
-    cout << "\tMa so   \tTen sach\t\t\t  Tac Gia\t\t      Danh Muc\t   Trang thai\n";
+    cout << "\tMa so   \tTen sach\t\t\t  Tac Gia\t\t      Danh Muc\t   So luong\n";
     cout << "\t---------------------------------------------------------------------------------------------------------\n";
     Management.PrintAllBook();
     system("pause");
@@ -122,6 +130,8 @@ void AddReader(){
     return;
 }
 
+
+
 void AddLoan(){
     Header();
     cout << "\t======================================== Nhap thong tin muon sach ========================================\n";
@@ -134,10 +144,16 @@ void AddLoan(){
         cin.clear();
         cin.ignore(123, '\n');
     }
+    if (Management.getCur(Management.IndexOfReader(ReaderNo)) == 5){
+        cout << "\tSo luong sach cua doc gia da dat toi da, vui long tra sach de muon tiep\n\t";
+        system("pause");
+        getchar();
+        MainMenu();
+    }
     cout << "\tNhap so luong sach muon : ";
     int addTotal;
-    while (!(cin >> addTotal) || addTotal < 1){
-        cout << "\tSo luong khong hop le, vui long nhap lai : ";
+    while (!(cin >> addTotal) || addTotal < 1 || addTotal + Management.getCur(Management.IndexOfReader(ReaderNo)) > 5){
+        cout << "\tSo luong khong hop le hoac da vuot qua gioi han muon sach, vui long nhap lai : ";
         cin.clear();
         cin.ignore(123, '\n');
     }
@@ -145,7 +161,8 @@ void AddLoan(){
     cin.ignore(123, '\n');
     auto now = std::chrono::system_clock::now();
     std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
-
+    string book[addTotal];
+    int bookindex = 0;
     for(int index = 0; index < addTotal; index++){
         Header();
         cout << "\t======================================== Nhap thong tin muon sach ========================================\n";
@@ -154,14 +171,17 @@ void AddLoan(){
         while ( !(getline(cin, tmpBook)) || tmpBook == "" || Management.IndexOfBook(tmpBook) == -1 || !Management.isBookValid(tmpBook)){
             cout << "\tKhong tim thay sach hoac sach da duoc muon, vui long nhap lai : ";
         }
+        book[bookindex] = tmpBook;
+        bookindex++;
         Loan NewLoan(Last_LoanNo + 1, ReaderNo, tmpBook, currentTime, 1);    
         Management.Add(NewLoan);
         Last_LoanNo++;
-        Management.setAvali(Management.IndexOfBook(tmpBook));
-        Management.setCur(Management.IndexOfReader(ReaderNo));
+        Management.setAvali(Management.IndexOfBook(tmpBook), true);
+        Management.setCur(Management.IndexOfReader(ReaderNo), true);
         cout << "\tDoc gia " << ReaderNo << " da muon sach " << tmpBook << " thanh cong - " << ctime(&currentTime) << "\t";
         system("pause");
     }
+    Management.printLoanForm(ReaderNo, book, bookindex, currentTime);
     // Set trang thai sach muon 
     Management.OutputToFile(1);
     Management.OutputToFile(2);
@@ -171,12 +191,22 @@ void AddLoan(){
     return;
 }
 
+void overdueBook(){
+    Header();
+    cout << "\t============================================ Sach muon qua han =============================================\n";
+    Management.overdueBook();
+    cout << "\t";
+    system("Pause");
+    MainMenu();
+    return;
+}
+
 void Search(){
     Header();
     cout << "\t================================================ Tra cuu =================================================\n";
     cout << "\tHien thi toan bo sach              : Nhan phim 1   ====  Hien thi toan bo doc gia           : Nhan phim 4 \n";
-    cout << "\tHien thi toan bo phieu muon        : Nhan phim 2   ====  Tra cuu theo tac gia               : Nhan phim 5 \n";
-    cout << "\tTra cuu theo danh muc              : Nhan phim 3   ====  Tro ve man hinh chinh              : Nhan phim 0 \n";
+    cout << "\tHien thi toan bo phieu muon        : Nhan phim 2   ====  Tra cuu sach theo tac gia          : Nhan phim 5 \n";
+    cout << "\tTra cuu sach theo danh muc         : Nhan phim 3   ====  Tra cuu sach muon qua han          : Nhan phim 6 \n";
     cout << "\t==========================================================================================================\n";
     getchar();
     switch (getchar()){
@@ -192,8 +222,20 @@ void Search(){
         PrintAllLoan();
         MainMenu();
         break;    
+    case '3':
+        SearchCate();
+        MainMenu();
+        break;
     case '4':
         PrintAllReader();
+        MainMenu();
+        break;
+    case '5':
+        SearchAuthor();
+        MainMenu();
+        break;
+    case '6':
+        overdueBook();
         MainMenu();
         break;
     default:
@@ -346,10 +388,10 @@ void MainMenu(){
     cout << "\t\t\t\t Library Management System - Chuong trinh quan ly thu vien\n";
     cout << "\t==========================================================================================================\n";
     cout << "\tNhap thong tin sach                : Nhan phim 1   ====  Nhap thong tin doc gia             : Nhan phim 5 \n";
-    cout << "\tNhap thong tin muon sach           : Nhan phim 2   ====  Sua - xoa thong tin doc gia        : Nhan phim 6 \n";
+    cout << "\tMuon sach                          : Nhan phim 2   ====  Sua - xoa thong tin doc gia        : Nhan phim 6 \n";
     cout << "\tSua - xoa thong tin sach           : Nhan phim 3   ====  Xoa thong tin muon sach            : Nhan phim 7 \n";
     cout << "\tTra cuu thong tin                  : Nhan phim 4   ====  Thong ke                           : Nhan phim 8 \n";
-    cout << "\t                                   Nhan phim 0 de thoat chuong trinh                                      \n";
+    cout << "\tTra sach                           : Nhan phim 9   ====  Tro ve man hinh chinh              : Nhan phim 0 \n";
     cout << "\t==========================================================================================================\n";
     switch( getchar() ){
         case '0':
@@ -379,10 +421,74 @@ void MainMenu(){
         case '8': 
             analyzeData();
             break;
+        case '9':
+            returnBook();
+            break;
         default:
             MainMenu();
             return;
     }
+}
+
+void returnBook(){
+    auto now = std::chrono::system_clock::now();
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+    Header();
+    cin.clear();
+    cin.ignore(123, '\n');
+    cout << "\t================================================ Tra sach ================================================\n";
+    cout << "\tNhap ma phieu muon sach : ";
+    int LoanNum;
+    while ( !(cin >> LoanNum) || Management.IndexOfLoan(LoanNum) == -1 || !Management.getStatus(LoanNum - 1)){
+        cout << "\tKhong tim thay giao dich muon sach, vui long nhap lai : ";
+    }
+    LoanNum--;
+    Management.returnBook(LoanNum);
+    cout << "\tTra sach thanh cong - " << ctime(&currentTime) << "\t";
+    Management.OutputToFile(1);
+    Management.OutputToFile(2);
+    Management.OutputToFile(3);
+    system("Pause");
+    MainMenu();
+    return;
+}
+
+void SearchAuthor(){
+    Header();
+    cout << "\t========================================== Tim sach theo tac gia ==========================================\n";
+    cin.clear();
+    cin.ignore(123, '\n');
+    cout << "\tNhap ten tac gia can tim : ";
+    string author;
+    getline(cin, author);
+    int num = Management.SearchAuthor(author);
+    cout << "\tDa tim thay " << num << " sach cua tac gia " << author << "\n\t";
+    system("Pause");
+    MainMenu();
+    return; 
+}
+
+void SearchCate(){
+    Header();
+    cout << "\t========================================== Tim sach theo danh muc ==========================================\n";
+    cin.clear();
+    cin.ignore(123, '\n');
+    cout << "\tCac danh muc hien co : \n";
+    for(int i = 0; i < 12; i++){
+        cout << "\t" << i << "." << BookCate[i] << "\n";
+    }
+    cout << "\tNhap danh muc can tim : ";
+    int cate;
+    while (!(cin >> cate) || cate > 12 || cate < 0){
+        cout << "\tDanh muc khong hop le, vui long nhap lai : ";
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+    int num = Management.SearchCate(cate);
+    cout << "\tDa tim thay " << num << " sach cua danh muc " << BookCate[cate] << "\n\t";
+    system("Pause");
+    MainMenu();
+    return; 
 }
 
 int main(){

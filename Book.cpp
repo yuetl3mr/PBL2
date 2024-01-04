@@ -5,8 +5,8 @@ Book::Book()
 {
 }
 
-Book::Book(string bookno, string name, string author, int cate, int tt)
-    : BookNo(bookno), Name(name), Author(author), Category(cate), Total(tt), Avalible(tt)
+Book::Book(string bookno, string name, string author, int cate, int tt, int av)
+    : BookNo(bookno), Name(name), Author(author), Category(cate), Total(tt), Avalible(av)
 {
 }
 
@@ -71,10 +71,20 @@ void Book::setAvali(bool t){
     else Avalible++;
 }
 
-const int getAvali(const Book& B){
-    return B.Avalible;
-}
-
 int Book::getAvali(){
     return Avalible;
+}
+
+bool Book::FindAuthor(string author){
+    if (author == this->Author) return true;
+    return false;
+}
+
+bool Book::FindCate(int cate){
+    if (cate == this->Category) return true;
+    return false;
+}
+
+string Book::getName(){
+    return Name;
 }

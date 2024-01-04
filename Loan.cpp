@@ -28,7 +28,6 @@ istream& operator>>(istream& inp, Loan& Info){
 
 const ostream& operator<<(ostream& outp, const Loan& Info){
     tm* Time = localtime(&Info.LoanDay);
-    ////
     cout << "\t"; outp << Info.LoanNo <<"\t   ";
     cout << "\t"; outp << setw(17) << left << Info.ReaderNo;
     cout << "\t"; outp << setw(17) << left << Info.BookNo;
@@ -49,5 +48,33 @@ string Loan::printFile(){
     return to_string(LoanNo) + ";" + ReaderNo + ";" + BookNo + ";" + to_string(LoanDay) + ";" + to_string(Status);
 }
 
-//Note : tinh thoi gian den han tra sach = giay -> time(0) - LoanTime
-//Update status (Book, Customer)
+string Loan::getBook(){
+    return BookNo;
+}
+
+string Loan::getReader(){
+    return ReaderNo;
+}
+
+void Loan::setStatus(){
+    Status = false;
+}
+
+bool Loan::getStatus(){
+    return Status;
+}
+
+void Loan::isoverDue(){
+    auto now = std::chrono::system_clock::now();
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+    double seconds = abs(difftime(LoanDay, currentTime));
+    int days = static_cast<int>(seconds / (60 * 60 * 24));
+    if (days > 60){
+        cout << "\t"; cout << "Ma phieu muon : " << LoanNo << "\n";
+        cout << "\t"; cout << "Ma doc gia : " << ReaderNo << "\n";
+        cout << "\t"; cout << "Ma sach : " << BookNo << "\n";
+        cout << "\tSo ngay qua han : "; cout << days;
+        cout << endl;
+        cout << "\t======================\n";
+    }
+}

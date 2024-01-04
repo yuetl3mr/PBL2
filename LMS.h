@@ -36,9 +36,11 @@ class LMS{
         void PrintAllReader();
         int IndexOfReader(const string&);
         void PrintLoan(int);
-        void setAvali(int);
-        void setCur(int);
+        void setAvali(int, bool);
+        void setCur(int, bool);
+        bool getStatus(int);
         friend Total GetTotal(const LMS&);
+        int getCur(int);
         void EditBook(int);
         void EditReader(int);
         void DeleteBook(int);
@@ -49,4 +51,9 @@ class LMS{
         void DeleteLoan(int);
         void ReaderStatistics();
         void BookStatistics();
+        void returnBook(int);
+        int SearchAuthor(string);
+        int SearchCate(int);
+        void printLoanForm(string, string[], int, time_t);
+        void overdueBook();
 };

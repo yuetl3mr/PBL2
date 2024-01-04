@@ -10,7 +10,7 @@ Reader::Reader(string rn)
 {
 }
 
-Reader::Reader(string no, bool gender, string name, time_t dob, string tel, bool cb)
+Reader::Reader(string no, bool gender, string name, time_t dob, string tel, int cb)
     : ReaderNo(no), Name(name), Gender(gender), Tel(tel), DoB(dob), Cur(cb)
 {
 }
@@ -80,6 +80,12 @@ string Reader::printFile(){
     return ReaderNo + ";" + to_string(Gender) + ";" + Name + ";" + to_string(DoB) + ";" + Tel + ";" + to_string(Cur);    
 }
 
-void Reader::SetCur(){
-    Cur = true;
+void Reader::SetCur(bool check){
+    if (check)
+        Cur++;
+    else Cur--;
+}
+
+string Reader::getName(){
+    return Name;
 }
